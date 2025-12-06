@@ -1,9 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { trendingAnime } from '@/data/mockData';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Anime } from '@/types/anime';
 
-const Trending = () => {
+interface TrendingProps {
+    trendingAnime: Anime[];
+}
+
+const Trending = ({ trendingAnime }: TrendingProps) => {
     return (
         <section className="py-8">
             <h2 className="text-[#FFDD95] text-xl font-bold mb-6">Trending</h2>
@@ -12,8 +16,8 @@ const Trending = () => {
                 <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
                     {trendingAnime.map((anime, index) => (
                         <Link
-                            key={anime.id}
-                            href={`/watch/${anime.id}`}
+                            key={anime.mal_id}
+                            href={`/watch/${anime.mal_id}`}
                             className="relative flex-shrink-0 w-[160px] h-[240px] group/card"
                         >
                             {/* Rank Number */}
@@ -26,7 +30,7 @@ const Trending = () => {
                             {/* Poster */}
                             <div className="relative w-full h-full rounded-md overflow-hidden">
                                 <Image
-                                    src={anime.image}
+                                    src={anime.images.webp.large_image_url}
                                     alt={anime.title}
                                     fill
                                     className="object-cover transition-transform duration-300 group-hover/card:scale-110"
@@ -39,29 +43,6 @@ const Trending = () => {
                                 <span className="text-white font-bold text-sm truncate block shadow-black drop-shadow-md">
                                     {anime.title}
                                 </span>
-                            </div>
-                        </Link>
-                    ))}
-
-                    {/* Duplicate for demo length */}
-                    {trendingAnime.map((anime, index) => (
-                        <Link
-                            key={`dup-${anime.id}`}
-                            href={`/watch/${anime.id}`}
-                            className="relative flex-shrink-0 w-[160px] h-[240px] group/card"
-                        >
-                            <div className="absolute -left-4 bottom-0 z-10">
-                                <span className="text-6xl font-bold text-white/20">
-                                    {String(index + 6).padStart(2, '0')}
-                                </span>
-                            </div>
-                            <div className="relative w-full h-full rounded-md overflow-hidden">
-                                <Image
-                                    src={anime.image}
-                                    alt={anime.title}
-                                    fill
-                                    className="object-cover transition-transform duration-300 group-hover/card:scale-110"
-                                />
                             </div>
                         </Link>
                     ))}

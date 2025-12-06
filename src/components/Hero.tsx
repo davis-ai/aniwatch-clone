@@ -4,10 +4,18 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight, Calendar, PlayCircle, Clock, Mic } from 'lucide-react';
-import { trendingAnime } from '@/data/mockData';
+import { Anime } from '@/types/anime';
 
-const Hero = () => {
+interface HeroProps {
+    trendingAnime: Anime[];
+}
+
+const Hero = ({ trendingAnime }: HeroProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    if (!trendingAnime || trendingAnime.length === 0) {
+        return null; // Or a loading skeleton
+    }
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % trendingAnime.length);
@@ -24,10 +32,11 @@ const Hero = () => {
             {/* Background Image with Blur */}
             <div className="absolute inset-0">
                 <Image
-                    src={currentAnime.image}
+                    src={currentAnime.images.webp.large_image_url}
                     alt={currentAnime.title}
                     fill
                     className="object-cover opacity-60"
+                    priority
                 />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-[#000000]/40 to-transparent" />
@@ -44,7 +53,7 @@ const Hero = () => {
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white line-clamp-2">
                         {currentAnime.title}
                     </h2>
 
@@ -56,32 +65,29 @@ const Hero = () => {
                         </span>
                         <span className="flex items-center gap-1 text-gray-300">
                             <Clock className="w-4 h-4" />
-                            24m
+                            {currentAnime.episodes ? `${currentAnime.episodes} eps` : '??'}
                         </span>
                         <span className="flex items-center gap-1 text-gray-300">
                             <Calendar className="w-4 h-4" />
-                            Oct 4, 2025
+                            {currentAnime.year || '2024'}
                         </span>
                         <span className="bg-[#FFDD95] text-black px-1.5 rounded text-xs font-bold">
                             HD
                         </span>
                         <span className="bg-[#b0e3af] text-black px-1.5 rounded text-xs font-bold flex items-center gap-1">
-                            <Mic className="w-3 h-3" /> 9
-                        </span>
-                        <span className="bg-[#e3b0c4] text-black px-1.5 rounded text-xs font-bold">
-                            7
+                            <Mic className="w-3 h-3" /> {currentAnime.score || 'N/A'}
                         </span>
                     </div>
 
                     {/* Description */}
                     <p className="text-gray-300 line-clamp-3 mb-8 text-base md:text-lg max-w-2xl">
-                        "This party doesn't need an incompetent magician who can only use supportive magic. You're fired, Alec Ygret." Suddenly, Alec, a court magician who had joined the crown prince's party to help him conquer dungeons—was banished from the party. And not just the party, but the crown prince's harassment has...
+                        {currentAnime.synopsis}
                     </p>
 
                     {/* Buttons */}
                     <div className="flex gap-4">
                         <Link
-                            href={`/watch/${currentAnime.id}`}
+                            href={`/watch/${currentAnime.mal_id}`}
                             className="bg-[#FFDD95] hover:bg-[#ffc85e] text-black px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-colors"
                         >
                             <PlayCircle className="w-5 h-5 fill-current" />
