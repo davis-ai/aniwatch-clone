@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { topAnime } from '@/data/mockData';
+import { animeService } from '@/services/animeService';
 
-const Sidebar = () => {
+const Sidebar = async () => {
+    const topAnime = await animeService.getTopAnime(10);
+
     return (
         <div className="space-y-8">
             {/* Top 10 Section */}
@@ -10,8 +12,8 @@ const Sidebar = () => {
                 <div className="space-y-4">
                     {topAnime.map((anime, index) => (
                         <Link
-                            key={anime.id}
-                            href={`/anime/${anime.id}`}
+                            key={anime.mal_id}
+                            href={`/anime/${anime.mal_id}`}
                             className="flex items-center gap-4 group"
                         >
                             <span className={`
@@ -25,7 +27,7 @@ const Sidebar = () => {
                                     {anime.title}
                                 </h4>
                                 <div className="flex items-center gap-2 text-xs text-gray-400">
-                                    <span>{anime.views} views</span>
+                                    <span>{anime.score ? `${anime.score} score` : 'N/A'}</span>
                                 </div>
                             </div>
                         </Link>

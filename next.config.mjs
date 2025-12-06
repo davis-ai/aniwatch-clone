@@ -6,6 +6,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'img.flawlessfiles.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'cdn.myanimelist.net',
+            },
         ],
     },
 };
