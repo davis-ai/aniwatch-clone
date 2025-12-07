@@ -50,6 +50,38 @@ const Sidebar = async () => {
                     ))}
                 </div>
             </div>
+
+            {/* Trending Posts Section (Mock) */}
+            <div className="bg-[#2a2c31] rounded-lg p-4">
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-[#FFDD95]">Trending Posts</h3>
+                    <Link href="#" className="text-xs text-gray-400 hover:text-white">View more ›</Link>
+                </div>
+                <div className="space-y-4">
+                    {[
+                        { tag: '#General', time: '6 days ago', comments: 7, title: "Here's the best underrated anime that I have watched.", user: 'Randi_baaz', color: 'text-blue-400' },
+                        { tag: '#Discussion', time: '6 days ago', comments: 2, title: "LETS talk ABut SomTHInG imrpTent!", user: 'Background character B', color: 'text-purple-400' },
+                        { tag: '#Question', time: '6 days ago', comments: 2, title: "So do i have to rank up again or can I transfer", user: 'Shadow_Monarch', color: 'text-green-400' },
+                    ].map((post, i) => (
+                        <div key={i} className="bg-[#1a1c21] p-3 rounded-lg hover:bg-[#3a3c41] transition-colors cursor-pointer group">
+                            <div className="flex items-center gap-2 mb-2 text-xs">
+                                <span className={`${post.color} font-bold`}>{post.tag}</span>
+                                <span className="text-gray-500">• {post.time}</span>
+                                <span className="ml-auto flex items-center gap-1 text-gray-500">
+                                    <span className="i-lucide-message-square w-3 h-3" /> {post.comments}
+                                </span>
+                            </div>
+                            <h4 className="text-white text-sm font-medium line-clamp-2 mb-2 group-hover:text-pink-500 transition-colors">
+                                {post.title}
+                            </h4>
+                            <div className="flex items-center gap-2">
+                                <div className="w-5 h-5 rounded-full bg-gray-600" />
+                                <span className="text-xs text-gray-400">{post.user}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };

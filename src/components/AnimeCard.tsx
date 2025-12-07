@@ -29,13 +29,22 @@ const AnimeCard = ({ id, title, image, episode, type }: AnimeCardProps) => {
 
                 {/* Badges */}
                 <div className="absolute top-2 left-2 flex gap-1">
+                    {/* Mocking CC and Mic badges for visual match */}
+                    <span className="bg-[#b0e3af] text-black text-[10px] font-bold px-1 rounded flex items-center h-4">
+                        CC
+                    </span>
+                    <span className="bg-[#b9e7ff] text-black text-[10px] font-bold px-1 rounded flex items-center h-4">
+                        <span className="i-lucide-mic w-2 h-2 mr-0.5" /> 10
+                    </span>
                     {episode && (
-                        <span className="bg-pink-500 text-white text-xs font-bold px-1.5 py-0.5 rounded">
-                            {episode.includes('PV') ? 'PV' : `Ep ${episode}`}
+                        <span className="bg-white/90 text-black text-[10px] font-bold px-1 rounded flex items-center h-4">
+                            {episode.includes('PV') ? 'PV' : `${episode}`}
                         </span>
                     )}
+                </div>
+                <div className="absolute bottom-2 right-2">
                     {type && (
-                        <span className="bg-black/60 text-white text-xs font-bold px-1.5 py-0.5 rounded backdrop-blur-sm">
+                        <span className="bg-black/60 text-white text-[10px] font-medium px-1 py-0.5 rounded backdrop-blur-sm">
                             {type}
                         </span>
                     )}
