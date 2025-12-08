@@ -19,6 +19,8 @@ export interface Anime {
     synopsis: string | null;
     season: string | null;
     year: number | null;
+    duration?: string;
+    title_japanese?: string;
     genres: {
         mal_id: number;
         type: string;

@@ -1,10 +1,29 @@
+"use client";
 import Link from 'next/link';
 import { Search, Menu, MessageCircle, Twitter, Send } from 'lucide-react';
 import { FaDiscord, FaRedditAlien, FaTelegramPlane } from 'react-icons/fa'; // Need to install react-icons or use lucide alternatives
 
+import { useState, useEffect } from 'react';
+
 const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 0) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <nav className="bg-[#202020] text-white px-4 py-2 fixed w-full top-0 z-50 shadow-md">
+        <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md shadow-lg' : 'bg-[#202020] shadow-md'
+            } text-white px-4 py-2`}>
             <div className="flex items-center justify-between h-14">
                 {/* Left: Hamburger & Logo */}
                 <div className="flex items-center gap-4">

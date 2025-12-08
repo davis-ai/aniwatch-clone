@@ -81,6 +81,7 @@ export default async function Home() {
                       image={anime.images.webp.large_image_url}
                       type={anime.type}
                       episode={anime.episodes ? String(anime.episodes) : undefined}
+                      anime={anime}
                     />
                   ))}
                 </div>
