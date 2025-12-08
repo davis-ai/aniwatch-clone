@@ -1,6 +1,7 @@
+
 "use client";
 import Link from 'next/link';
-import { Search, Menu, MessageCircle, Twitter, Send } from 'lucide-react';
+import { Search, Menu, Twitter } from 'lucide-react';
 import { FaDiscord, FaRedditAlien, FaTelegramPlane } from 'react-icons/fa'; // Need to install react-icons or use lucide alternatives
 
 import { useState, useEffect } from 'react';

@@ -52,11 +52,11 @@ export default async function Home() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {latestEpisodes.map((episode) => (
                     <AnimeCard
-                      key={episode.entry.mal_id + episode.episodes[0]?.title}
+                      key={`${episode.entry.mal_id}-${episode.episodes[0]?.title || 'unknown'}`}
                       id={episode.entry.mal_id}
                       title={episode.entry.title}
                       image={episode.entry.images.webp.large_image_url}
-                      episode={episode.episodes[0]?.title.replace('Episode ', '') || '?'}
+                      episode={episode.episodes[0]?.title?.replace('Episode ', '') || '?'}
                       type="TV"
                     />
                   ))}

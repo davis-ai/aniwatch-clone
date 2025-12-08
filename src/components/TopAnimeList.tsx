@@ -12,7 +12,7 @@ const TopAnimeList = ({ title, animeList }: TopAnimeListProps) => {
         <div className="flex flex-col gap-4">
             <h3 className="text-[#FFDD95] text-xl font-bold">{title}</h3>
             <div className="flex flex-col gap-4">
-                {animeList.map((anime, index) => (
+                {animeList.map((anime) => (
                     <Link
                         key={anime.mal_id}
                         href={`/anime/${anime.mal_id}`}
